@@ -49,25 +49,18 @@ class _CrispViewState extends State<CrispView> {
   InAppWebViewController? _webViewController;
   String? _javascriptString;
 
-  late InAppWebViewGroupOptions _options;
+  late InAppWebViewSettings _options;
 
   @override
   void initState() {
     super.initState();
-    _options = InAppWebViewGroupOptions(
-      crossPlatform: InAppWebViewOptions(
-        transparentBackground: widget.transparentBackground,
-        clearCache: widget.clearCache,
-        useShouldOverrideUrlLoading: true,
-        mediaPlaybackRequiresUserGesture: false,
-      ),
-      android: AndroidInAppWebViewOptions(
-        useHybridComposition: true,
-        cacheMode: AndroidCacheMode.LOAD_CACHE_ELSE_NETWORK,
-      ),
-      ios: IOSInAppWebViewOptions(
-        allowsInlineMediaPlayback: true,
-      ),
+    _options = InAppWebViewSettings(
+      transparentBackground: widget.transparentBackground,
+      clearCache: widget.clearCache,
+      useShouldOverrideUrlLoading: true,
+      mediaPlaybackRequiresUserGesture: false,
+      useHybridComposition: true,
+      allowsInlineMediaPlayback: true
     );
 
     _javascriptString = """
@@ -92,13 +85,13 @@ class _CrispViewState extends State<CrispView> {
           ),
         ),
       initialUrlRequest: URLRequest(
-        url: Uri.parse(_crispEmbedUrl(
+        url: WebUri(_crispEmbedUrl(
           websiteId: widget.crispMain.websiteId,
           locale: widget.crispMain.locale,
           userToken: widget.crispMain.userToken,
         )),
       ),
-      initialOptions: _options,
+      initialSettings: _options,
       onWebViewCreated: (InAppWebViewController controller) {
         _webViewController = controller;
       },
