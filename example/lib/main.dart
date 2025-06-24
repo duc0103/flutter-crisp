@@ -9,14 +9,14 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  CrispMain crispMain;
+  late CrispMain crispMain;
 
   @override
   void initState() {
     super.initState();
 
     crispMain = CrispMain(
-      websiteId: 'WEBSITE_ID',
+      websiteId: 'f8efe293-efd5-4c90-a117-66807459bb38',
       locale: 'pt-br',
     );
 
@@ -29,7 +29,7 @@ class _MyAppState extends State<MyApp> {
       ),
     );
 
-    crispMain.setMessage("Hello world");
+     crispMain.setMessage('');
 
     crispMain.setSessionData({
       "order_id": "111",
